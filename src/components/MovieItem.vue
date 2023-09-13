@@ -1,5 +1,20 @@
 <template>
-  <div>{{ movie.imdbID }}</div>
+  <div 
+    :style="{ backgroundImage: `url(${movie.Poster})` }"
+    class="movie">
+    <img 
+      :src="movie.Poster"
+      alt=""
+      width="200" />
+    <div class="info">
+      <div class="year">
+        {{ movie.Year }}
+      </div>
+      <div class="title">
+        {{ movie.Title }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
