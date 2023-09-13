@@ -31,6 +31,18 @@ export default {
     //비동기
     actions : {
         async searchMovies({ state, commit } , payload){
+            if (state.loading) return
+
+            commit('updateState', {
+              theMovie: {},
+              loading: true,
+            })
+            commit('updateState',{
+                message: '',
+                loading :true
+            })
+
+            try {
         const res = await _fethMovie({
             ...payload,
             page:1
@@ -45,14 +57,13 @@ export default {
 
         const total = parseInt(totalResults,10)
         const pageLength =Math.ceil(total/10)
-        // console.log(total);
-        // console.log(pageLength)
+        console.log(total);
+        console.log(pageLength)
             //추가요청
         if(pageLength >1) {
-            for(let page =2 ; page <= pageLength; page +=1){
-              if (page > payload.number / 10){ 
-                break
-              }
+            for(let page = 2 ; page <= pageLength; page +=1){
+              if (page > (payload.number / 10)) break
+
               const res = await _fethMovie ({
                 ...payload,
                 page
@@ -60,14 +71,27 @@ export default {
               const {Search}=res.data
                 commit('updateState', {
                     movies :[
-                        ...state.movies, ...Search],
+                        ...state.movies, 
+                        ..._uniqBy(Search, 'imdbID')
+                    ],
                     // message :'helloworld',
                     // loading :true
                 })
             }
         }
+    }catch (message){
+        commit('updateState',{
+            message: '',
+            loading :true
+        })
+    }finally {
+        commit('updateState',{
+           
+            loading :false
+        })
     }
 }
+    }
 }
 
 function _fethMovie(payload){
