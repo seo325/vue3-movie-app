@@ -37,6 +37,7 @@ export default {
               theMovie: {},
               loading: true,
             })
+            
             commit('updateState',{
                 message: '',
                 loading :true
