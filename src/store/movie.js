@@ -92,14 +92,31 @@ export default {
                 })
             }
         }, 
-      async searchMovieWithId(context, payload) {
+      async searchMovieWithId({state, commit}, payload) {
+        if(state .loading) return
+
+        commit('updateState', {
+            theMovie :{},
+            loading : true
+        })
+
         try {
             const res = await _fethMovie({
                 payload 
             })
-            console.log(res)
-        } catch (error) {
+            // console.log(res)
+            commit('updateState', {
+               theMovie : res.data
+            })
 
+        } catch (error) {
+            commit('updateState', {
+                theMovie: {}
+            })
+        }finally {
+            commit('updateState', {
+                loading:false
+            })
         }
       }
 
