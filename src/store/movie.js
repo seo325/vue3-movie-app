@@ -104,7 +104,7 @@ export default {
             const res = await _fethMovie({
                 payload 
             })
-            // console.log(res)
+            console.log(res.data)
             commit('updateState', {
                theMovie : res.data
             })

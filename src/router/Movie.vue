@@ -233,7 +233,7 @@ export default {
     }
   }
   @include media-breakpoint-down(md) {
-    .specs {
+    .specs {ㄹ
       .title {
         font-size: 50px;
       }
