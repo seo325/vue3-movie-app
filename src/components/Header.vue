@@ -9,6 +9,7 @@
         <RouterLink 
           :to="nav.href"
           active-class="active"
+          :class="{ active: isMatch(nav.path) }"
           class="nav-link">
           {{ nav.name }}
         </RouterLink>
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-import Logo from './Logo.vue';
 
 export default {
  
@@ -31,7 +31,7 @@ export default {
                 },
                 {
                     name: 'Movie',
-                    href: '/movie/tt13138624',
+                    href: '/movie/tt2294629',
                     path: /^\/movie/
                 },
                 {
@@ -41,7 +41,12 @@ export default {
             ]
         };
     },
-    components: { Logo }
+   methods :{
+    isMatch(path) {
+      if (!path) return false
+      return path.test(this.$route.fullPath)
+   }
+  }
 }
 
 

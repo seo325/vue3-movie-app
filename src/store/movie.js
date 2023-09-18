@@ -53,13 +53,13 @@ export default {
                 commit('updateState', {
                     movies: _uniqBy(Search, 'imdbID')
                 })
-                console.log(totalResults);
-                console.log(typeof totalResults)
+                // console.log(totalResults);
+                // console.log(typeof totalResults)
 
                 const total = parseInt(totalResults, 10)
                 const pageLength = Math.ceil(total / 10)
-                console.log(total);
-                console.log(pageLength)
+                // console.log(total);
+                // console.log(pageLength)
                 //추가요청
                 if (pageLength > 1) {
                     for (let page = 2; page <= pageLength; page += 1) {
@@ -137,7 +137,7 @@ function _fethMovie(payload) {
                 if (res.data.Error) {
                     reject(res.data.Error)
                 }
-                console.log(res)
+                // console.log(res)
                 resovle(res)
             })
             .catch((err => {

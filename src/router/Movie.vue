@@ -88,12 +88,12 @@ export default {
       imageLoading: true
     }
   },
-  computed: {
+   computed: {
     ...mapState('movie', [
       'loading',
       'theMovie'
     ])
-  },
+   },
   created() {
     this.$store.dispatch('movie/searchMovieWithId', {
       id: this.$route.params.id
@@ -119,8 +119,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-@import "../scss/main";
+@import '../scss/main';
 .container {
   padding-top: 40px;
 }
@@ -233,7 +232,7 @@ export default {
     }
   }
   @include media-breakpoint-down(md) {
-    .specs {ㄹ
+    .specs {
       .title {
         font-size: 50px;
       }
