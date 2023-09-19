@@ -99,10 +99,9 @@ export default {
         })
 
         try {
-            const res = await _fethMovie({
-                payload 
-            })
+            const res = await _fethMovie(payload)
             console.log(res)
+            
             commit('updateState', {
                theMovie : res.data
             })

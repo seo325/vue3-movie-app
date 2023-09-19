@@ -32,7 +32,7 @@ export default {
                 {
                     name: 'Movie',
                     href: '/movie/tt4007502',
-                    // path: /^\/movie/
+                    path: /^\/movie/
                 },
                 {
                     name: 'About',
