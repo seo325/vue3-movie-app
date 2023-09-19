@@ -21,7 +21,7 @@
       v-else
       class="movie-details">
       <div
-        :style="{ backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})` }"
+        :style="{ backgroundImage: `url(${theMovie.Poster})` }"
         class="poster">
         <Loader
           v-if="imageLoading"
@@ -47,9 +47,9 @@
               :key="name"
               :title="name"
               class="rating">
-              <img
+              <!-- <img
                 :src="`https://raw.githubusercontent.com/ParkYoungWoong/vue3-movie-app/master/src/assets/${name}.png`"
-                :alt="name" />
+                :alt="name" /> -->
               <span>{{ score }}</span>
             </div>
           </div>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 import Loader from '~/components/Loader'
 
 export default {
@@ -89,32 +89,36 @@ export default {
     }
   },
    computed: {
-    ...mapState('movie', [
-      'loading',
-      'theMovie'
-    ])
+      theMovie(){
+        return this.$store.state.movie.theMovie
+      },
+      loading(){
+        return this.$store.state.movie.loading
+      }
    },
   created() {
+    console.log("3",this.$route)
     this.$store.dispatch('movie/searchMovieWithId', {
       id: this.$route.params.id
     })
   },
-  methods: {
-    requestDiffSizeImage(url, size = 700) {
-      // 잘못된 URL(Poster)인 경우.
-      if (!url || url === 'N/A') {
-        this.imageLoading = false
-        return ''
-      }
-      const src = url.replace('SX300', `SX${size}`)
-      // 정상적인 URL인 경우.
-      this.$loadImage(src)
-        .then(() => {
-          this.imageLoading = false
-        })
-      return src
-    }
-  }
+  // methods: {
+  //   requestDiffSizeImage(url, size = 700) {
+  //     // 잘못된 URL(Poster)인 경우.
+  //     console.log("dddd")
+  //     if (!url || url === 'N/A') {
+  //       this.imageLoading = false
+  //       return ''
+  //     }
+  //     const src = url.replace('SX300', `SX${size}`)
+  //     // 정상적인 URL인 경우.
+  //     this.$loadImage(src)
+  //       .then(() => {
+  //         this.imageLoading = false
+  //       })
+  //     return src
+  //   }
+  // }
 }
 </script>
 
@@ -128,7 +132,7 @@ export default {
   .poster {
     flex-shrink: 0;
     width: 500px;
-    height: 500px * 3/2;
+    height: 500px * 3 / 2;
     margin-right: 70px;
   }
   .specs {

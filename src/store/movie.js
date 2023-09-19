@@ -1,5 +1,3 @@
-
-
 const _defaultMessage = 'Search for the movie title!'
 import axios from 'axios'
 import _uniqBy from 'lodash/uniqBy'
@@ -104,13 +102,15 @@ export default {
             const res = await _fethMovie({
                 payload 
             })
-            console.log(res.data)
+            console.log(res)
             commit('updateState', {
                theMovie : res.data
             })
 
         } catch (error) {
+            console.log(error)
             commit('updateState', {
+                
                 theMovie: {}
             })
         }finally {
@@ -137,7 +137,7 @@ function _fethMovie(payload) {
                 if (res.data.Error) {
                     reject(res.data.Error)
                 }
-                // console.log(res)
+                console.log(res)
                 resovle(res)
             })
             .catch((err => {

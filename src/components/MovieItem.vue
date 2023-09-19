@@ -32,8 +32,10 @@
       }
     },
     data() {
+        console.log(this.movie)
       return {
         imageLoading: true
+        
       }
     },
     mounted() {
