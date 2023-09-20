@@ -26,9 +26,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Logo from '~/components/Logo'
 
 export default {
- 
+  components: {
+    Logo
+  },
     data() {
         return {
             navigations: [
@@ -48,21 +52,20 @@ export default {
             ]
         };
     },
-    computed : {
-      image(){
-        return this.$store.state.about.image
-      },
-      name(){
-        return this.$store.state.about.name
-      },
-    },
+    computed: {
+    ...mapState('about', [
+      'image',
+      'name'
+    ])
+  },
+
    methods :{
     isMatch(path) {
       if (!path) return false
       return path.test(this.$route.fullPath)
    },
    toAbout(){
-    console.log("1!!!!")
+    console.log
     this.$rotuer.push('/about')
    }
   }
@@ -101,11 +104,6 @@ header {
     }
     img {
       width: 100%;
-    }
-  }
-  @include media-breakpoint-down(sm) {
-    .nav {
-      display: none;
     }
   }
 }
