@@ -60,6 +60,10 @@ export default {
     isMatch(path) {
       if (!path) return false
       return path.test(this.$route.fullPath)
+   },
+   toAbout(){
+    console.log("1!!!!")
+    this.$rotuer.push('/about')
    }
   }
 }
@@ -74,6 +78,7 @@ header {
   padding: 0 40px;
   display: flex;
   align-items: center;
+  position: relative;
   .logo{
     margin-right: 40px;
   }
@@ -96,6 +101,11 @@ header {
     }
     img {
       width: 100%;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .nav {
+      display: none;
     }
   }
 }

@@ -1,30 +1,29 @@
 <template>
-  <div class="continaer">
-    <input 
+  <div class="container">
+    <input
       v-model="title"
       class="form-control"
       type="text"
-      placeholder="search for movives, Series & more" 
+      placeholder="Search for Movies, Series & more"
       @keyup.enter="apply" />
-  </div>
-  <div class="selects">
-    <select
-      v-for="filter in filters"
-      v-model="$data[filter.name]"
-      :key="filter.name"
-      class="form-select">
-      <option
-        v-if="filter.name === 'year'"
-        value="">
-        All Years
-      </option>
-      <option
-        v-for="item in filter.items"
-        :key="item">
-        {{ item }}
-      </option>
-    </select>
-
+    <div class="selects">
+      <select
+        v-for="filter in filters"
+        v-model="$data[filter.name]"
+        :key="filter.name"
+        class="form-select">
+        <option
+          v-if="filter.name === 'year'"
+          value="">
+          All Years
+        </option>
+        <option
+          v-for="item in filter.items"
+          :key="item">
+          {{ item }}
+        </option>
+      </select>
+    </div>
     <button
       class="btn btn-primary"
       @click="apply">
@@ -35,14 +34,13 @@
 
 <script>
 export default {
-    data() {
-        return{
-            title :'',
-            type: 'movie',
-            number : 10,
-            year : '',
-            
-            filters: [
+  data() {
+    return {
+      title: '',
+      type: 'movie',
+      number: 10,
+      year: '',
+      filters: [
         {
           name: 'type',
           items: ['movie', 'series', 'episode']
@@ -63,24 +61,24 @@ export default {
           })()
         }
       ]
-        }
-    },
-    methods: {
-    async apply() {
-        this.$store.dispatch("movie/searchMovies",{
-            title : this.title,
-            type :this.type,
-            nummber :this.number,
-            year : this.year
-
-        })
+    }
+  },
+  methods: {
+    apply() {
+      this.$store.dispatch('movie/searchMovies', {
+        title: this.title,
+        type: this.type,
+        number: this.number,
+        year: this.year
+      })
     }
   }
 }
 </script>
 
-
 <style lang="scss" scoped>
+@import '../scss/main';
+
 .container {
   display: flex;
   > * {
@@ -93,7 +91,7 @@ export default {
   .selects {
     display: flex;
     select {
-      width:120px;
+      width: 120px;
       margin-right: 10px;
       &:last-child {
         margin-right: 0;
@@ -105,6 +103,24 @@ export default {
     height: 50px;
     flex-shrink: 0;
     font-weight: 700;
+  }
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+    input {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .selects {
+      margin-right: 0;
+      margin-bottom: 10px;
+      select {
+        width: 100%;
+      }
+    }
+    .btn {
+      width: 100%;
+    }
   }
 }
 </style>
