@@ -5,3 +5,5 @@
 
 # node version 확인
 nvm install 16.9.0
+
+# main page , detail page, about page 
